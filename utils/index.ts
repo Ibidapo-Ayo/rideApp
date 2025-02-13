@@ -11,7 +11,7 @@ export const getBgVariantStyle = (variant:ButtonProps['bgVariant'])=> {
         return "bg-green-500"
     }
     if(variant === "outline"){
-        return "bg-transparent border-neutral-300 border-[0.5px]"
+        return "bg-transparent border-neutral-300 border-[1px]"
     }
 
     return "bg-[#0286ff]"

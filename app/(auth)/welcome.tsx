@@ -15,11 +15,12 @@ const WelcomeScreen = () => {
   const replaceRouter = () => {
     router.replace("/(auth)/sign-up");
   };
+  
   return (
-    <SafeAreaView className="flex h-full bg-white items-center justify-between pb-10">
+    <SafeAreaView className="flex h-full bg-white items-center justify-between pb-10 px-5">
       <TouchableOpacity
         onPress={replaceRouter}
-        className="w-full flex items-end p-5"
+        className="w-full flex items-end py-2"
       >
         <Text className="text-xl text-black font-JakartaBold">Skip</Text>
       </TouchableOpacity>
