@@ -42,7 +42,7 @@ const Input = ({
               <Image source={icon} className={`h-6 w-6  ${iconStyle}`} />
             )}
             <TextInput
-              className={`p-4 rounded-full font-JakartaSemiBold text-[15px] flex-1 text-left ${inputStyle}`}
+              className={`p-4 rounded-full font-JakartaSemiBold text-[15px] flex-1 placeholder:text-neutral-400 text-left ${inputStyle}`}
               secureTextEntry={openPassword}
               {...props}
             />

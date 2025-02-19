@@ -6,17 +6,39 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchemaType, loginSchema } from "@/schema/validations";
 import CustomButton from "@/components/CustomButton";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import OAuth from "@/components/OAuth";
+import { useSignIn } from "@clerk/clerk-expo";
 
 const SignUpScreen = () => {
   const { control, handleSubmit } = useForm<loginSchemaType>({
     resolver: zodResolver(loginSchema),
   });
 
-  const submitForm = (values: loginSchemaType) => {
-    console.log(values);
+  const { signIn, setActive, isLoaded } = useSignIn();
+  const router = useRouter();
+
+  const submitForm = async (values: loginSchemaType) => {
+    if (!isLoaded) return;
+
+    // Start the sign-in process using the email and password provided
+    try {
+      const signInAttempt = await signIn.create({
+        identifier: values.email,
+        password: values.password,
+      });
+
+      if (signInAttempt.status === "complete") {
+        await setActive({ session: signInAttempt.createdSessionId });
+        router.replace("/");
+      } else {
+        console.error(JSON.stringify(signInAttempt, null, 2));
+      }
+    } catch (err) {
+      console.error(JSON.stringify(err, null, 2));
+    }
   };
+
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
